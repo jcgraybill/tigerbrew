@@ -24,6 +24,10 @@ end
   option "with-dirty-schedulers", "Enable experimental dirty schedulers"
   option "without-docs", "Do not install documentation"
 
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
+
   depends_on "fop" => :optional
   depends_on "libutil" if MacOS.version < :leopard
   depends_on "wxmac" => :recommended if MacOS.version > :tiger

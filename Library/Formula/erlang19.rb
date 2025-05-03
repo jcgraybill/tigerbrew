@@ -19,10 +19,15 @@ end
     sha256 "dc3e3a82d1aba7f0deac1ddb81b7d6f8dee9a75e1d42b90c677a2b645f19a00c"
 end
 
+
   option "without-hipe", "Disable building HiPE (High-Performance Erlang)"
   option "with-native-libs", "Enable native library compilation"
   option "with-dirty-schedulers", "Enable experimental dirty schedulers"
   option "without-docs", "Do not install documentation"
+
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
 
   depends_on "fop" => :optional
   depends_on "libutil" if MacOS.version < :leopard
