@@ -1,7 +1,7 @@
 # Major releases of erlang should typically start out as separate formula in
 # Homebrew-versions, and only be merged to master when things like couchdb and
 # elixir are compatible.
-class Erlang < Formula
+class Erlang23 < Formula
   desc "Erlang Programming Language"
   homepage "http://www.erlang.org"
 
