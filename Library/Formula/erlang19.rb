@@ -25,7 +25,6 @@ end
   option "with-dirty-schedulers", "Enable experimental dirty schedulers"
   option "without-docs", "Do not install documentation"
 
-  depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "libtool" => :build
 

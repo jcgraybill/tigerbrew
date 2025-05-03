@@ -19,12 +19,16 @@ class Erlang18 < Formula
     sha256 "8fd6980fd05367735779a487df107ace7c53733f52fbe56de7ca7844a355676f"
   end
 
+  # Current autoconf (2.7.x) has trouble dealing with $ERL_TOP, resulting in
+  # configure: error: cannot find required auxiliary files: install-sh config.guess config.sub
+  patch :p0, :DATA
+
+
   option "without-hipe", "Disable building HiPE (High-Performance Erlang)"
   option "with-native-libs", "Enable native library compilation"
   option "with-dirty-schedulers", "Enable experimental dirty schedulers"
   option "without-docs", "Do not install documentation"
 
-  depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "libtool" => :build
 
@@ -100,3 +104,66 @@ class Erlang18 < Formula
     system "#{bin}/erl", "-noshell", "-eval", "crypto:start().", "-s", "init", "stop"
   end
 end
+__END__
+--- lib/snmp/configure.in.orig	2025-04-28 01:39:37.000000000 +0100
++++ lib/snmp/configure.in	2025-04-28 01:40:16.000000000 +0100
+@@ -4,12 +4,8 @@
+ 
+ AC_INIT(vsn.mk)
+ 
+-if test -z "$ERL_TOP" || test ! -d $ERL_TOP ; then
+-  AC_CONFIG_AUX_DIRS(autoconf)
+-else
+-  erl_top=${ERL_TOP}
+-  AC_CONFIG_AUX_DIRS($erl_top/erts/autoconf)
+-fi
++erl_top=${ERL_TOP}
++AC_CONFIG_AUX_DIRS(../../erts/autoconf)
+ 
+ if test "X$host" != "Xfree_source" -a "X$host" != "Xwin32"; then
+     AC_CANONICAL_HOST
+--- lib/megaco/configure.in.orig	2025-04-28 01:40:32.000000000 +0100
++++ lib/megaco/configure.in	2025-04-28 01:40:56.000000000 +0100
+@@ -29,12 +29,8 @@
+ 
+ AC_INIT(vsn.mk)
+ 
+-if test -z "$ERL_TOP" || test ! -d $ERL_TOP ; then
+-  AC_CONFIG_AUX_DIRS(autoconf)
+-else
+-  erl_top=${ERL_TOP}
+-  AC_CONFIG_AUX_DIRS($erl_top/erts/autoconf)
+-fi
++erl_top=${ERL_TOP}
++AC_CONFIG_AUX_DIRS(../../erts/autoconf)
+ 
+ if test "X$host" != "Xfree_source" -a "X$host" != "Xwin32"; then
+     AC_CANONICAL_HOST
+--- lib/odbc/configure.in.orig	2025-04-28 01:41:20.000000000 +0100
++++ lib/odbc/configure.in	2025-04-28 01:41:44.000000000 +0100
+@@ -31,12 +31,8 @@
+ dnl Process this file with autoconf to produce a configure script.
+ AC_INIT(c_src/odbcserver.c)
+ 
+-if test -z "$ERL_TOP" || test ! -d $ERL_TOP ; then
+-  AC_CONFIG_AUX_DIRS(autoconf)
+-else
+-  erl_top=${ERL_TOP}
+-  AC_CONFIG_AUX_DIRS($erl_top/erts/autoconf)
+-fi
++erl_top=${ERL_TOP}
++AC_CONFIG_AUX_DIRS(../../erts/autoconf)
+ 
+ if test "X$host" != "Xfree_source" -a "X$host" != "Xwin32"; then
+     AC_CANONICAL_HOST
+--- lib/gs/configure.in.orig	2025-04-28 01:44:20.000000000 +0100
++++ lib/gs/configure.in	2025-04-28 01:44:54.000000000 +0100
+@@ -8,7 +8,7 @@
+   AC_MSG_ERROR(You need to set the environment variable ERL_TOP!)
+ fi
+ erl_top=${ERL_TOP}
+-AC_CONFIG_AUX_DIRS($erl_top/erts/autoconf)
++AC_CONFIG_AUX_DIRS(../../erts/autoconf)
+ 
+ dnl FIXME: Should be AC_CANONICAL_TARGET but we follow pattern in
+ dnl main configure.in.
