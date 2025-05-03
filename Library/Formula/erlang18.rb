@@ -1,10 +1,16 @@
+# Major releases of erlang should typically start out as separate formula in
+# Homebrew-versions, and only be merged to master when things like couchdb and
+# elixir are compatible.
 class Erlang18 < Formula
   desc "Erlang Programming Language"
   homepage "http://www.erlang.org"
 
+  head "https://github.com/erlang/otp.git"
+
   keg_only "experimental formula for alternate version"
 
   stable do
+    # Download tarball from GitHub; it is served faster than the official tarball.
     url "https://github.com/erlang/otp/archive/OTP-18.3.4.11.tar.gz"
     sha256 "94f84e8ca0db0dcadd3411fa7a05dd937142b6ae830255dc341c30b45261b01a"
   end
@@ -23,18 +29,20 @@ class Erlang18 < Formula
   # configure: error: cannot find required auxiliary files: install-sh config.guess config.sub
   patch :p0, :DATA
 
-
-  option "without-hipe", "Disable building HiPE (High-Performance Erlang)"
+  option "without-hipe", "Disable building HiPE (High-Performance Erlang); fails on various OS X systems"
   option "with-native-libs", "Enable native library compilation"
   option "with-dirty-schedulers", "Enable experimental dirty schedulers"
   option "without-docs", "Do not install documentation"
 
-  depends_on "automake" => :build
-  depends_on "libtool" => :build
+  deprecated_option "disable-hipe" => "without-hipe"
+  deprecated_option "no-docs" => "without-docs"
 
-  depends_on "fop" => :optional
+  depends_on "autoconf" => :build
+  depends_on "unixodbc" if MacOS.version >= :mavericks
+  depends_on "fop" => :optional # enables building PDF docs
+  # Need wxWidgets 2.8.4 or above. Tiger includes 2.5.3, 3.x needs Leopard minimum.
+  depends_on "wxmac" => :recommended if MacOS.version > :tiger # for GUI apps like observer
   depends_on "libutil" if MacOS.version < :leopard
-  depends_on "wxmac" => :recommended if MacOS.version > :tiger
   depends_on "zlib"
 
   fails_with :gcc do
@@ -48,6 +56,9 @@ class Erlang18 < Formula
     %w[LIBS FLAGS AFLAGS ZFLAGS].each { |k| ENV.delete("ERL_#{k}") }
 
     ENV["FOP"] = "#{HOMEBREW_PREFIX}/bin/fop" if build.with? "fop"
+
+    # Do this if building from a checkout to generate configure
+    system "./otp_build", "autoconf" if File.exist? "otp_build"
 
     args = %W[
       --disable-debug
@@ -63,8 +74,9 @@ class Erlang18 < Formula
     args << "--enable-native-libs" if build.with? "native-libs"
     args << "--enable-dirty-schedulers" if build.with? "dirty-schedulers"
     args << "--enable-wx" if build.with? "wxmac"
+    # Older Javas not supported by jinterface
+    # https://github.com/mistydemeo/tigerbrew/issues/372
     args << "--without-javac" if MacOS.version < :snow_leopard
-
     # error: cannot compute sizeof (__int128_t, 77)
     # In /usr/include/c++/4.0.0/powerpc64-apple-darwin8/bits/stdc++.h.gch/O0g.gch & O2g.gch
     # symbol is found but configure's test for it fails, breaking the build
@@ -75,12 +87,14 @@ class Erlang18 < Formula
     end
 
     if build.without? "hipe"
+      # HiPE doesn't strike me as that reliable on OS X
+      # http://syntatic.wordpress.com/2008/06/12/macports-erlang-bus-error-due-to-mac-os-x-1053-update/
+      # http://www.erlang.org/pipermail/erlang-patches/2008-September/000293.html
       args << "--disable-hipe"
     else
       args << "--enable-hipe"
     end
 
-    system "./otp_build", "autoconf"
     system "./configure", *args
     system "make"
     ENV.j1 # Install is not thread-safe; can try to create folder twice and fail
