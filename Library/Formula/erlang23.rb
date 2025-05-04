@@ -59,7 +59,7 @@ class Erlang23 < Formula
       --disable-debug
       --disable-silent-rules
       --prefix=#{prefix}
-      --enable-kernel-poll
+      --disable-kernel-poll
       --enable-threads
       --enable-shared-zlib
       --enable-smp-support
