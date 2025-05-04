@@ -7,6 +7,8 @@ class Erlang23 < Formula
 
   head "https://github.com/erlang/otp.git"
 
+  keg_only "experimental formula for alternate version"
+
   stable do
     url "https://github.com/erlang/otp/archive/OTP-23.3.4.20.tar.gz"
     sha256 "887859a686f3278e2a60435713ade724f97e6222cb7693a5f37c6a894ac42f8e"
