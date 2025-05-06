@@ -96,7 +96,7 @@ class Erlang23 < Formula
     system "make", "install"
 
     if build.with? "docs"
-      (lib/"erlang").install resource("man")
+      (lib/"erlang/man").install resource("man")
       doc.install resource("html")
     end
   end
