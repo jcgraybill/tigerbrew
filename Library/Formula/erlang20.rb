@@ -24,9 +24,10 @@ end
   option "with-dirty-schedulers", "Enable experimental dirty schedulers"
   option "without-docs", "Do not install documentation"
 
-  depends_on "autoconf" => :build
-  depends_on "automake" => :build
-  depends_on "libtool" => :build
+  # Configuration fails on Leopard / Intel
+  # depends_on "autoconf" => :build
+  # depends_on "automake" => :build
+  # depends_on "libtool" => :build
 
   depends_on "fop" => :optional
   depends_on "libutil" if MacOS.version < :leopard
