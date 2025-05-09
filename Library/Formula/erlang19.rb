@@ -25,8 +25,9 @@ end
   option "with-dirty-schedulers", "Enable experimental dirty schedulers"
   option "without-docs", "Do not install documentation"
 
-  depends_on "automake" => :build
-  depends_on "libtool" => :build
+  # TODO: Breaks Tiger Intel
+#  depends_on "automake" => :build
+#  depends_on "libtool" => :build
 
   depends_on "fop" => :optional
   depends_on "libutil" if MacOS.version < :leopard
