@@ -50,11 +50,11 @@ class Erlang18 < Formula
     cause "Bus error when attempting to build HiPE"
   end
 
+  # TODO this doesn't work :(
   fails_with :gcc if MacOS.version == :leopard && Hardware::CPU.intel? do
     build 5577
     cause "Build fails with pthread/ethr x86_ sse2_asm.c:32: internal compiler error: Abort trap"
   end
-
 
   def install
     # Unset these so that building wx, kernel, compiler and
