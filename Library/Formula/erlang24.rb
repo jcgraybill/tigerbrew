@@ -30,7 +30,7 @@ end
 
   depends_on "fop" => :optional
   depends_on "libutil" if MacOS.version < :leopard
-  depends_on "openssl"
+  depends_on "openssl3"
   depends_on "wxmac" => :recommended if MacOS.version > :tiger
   depends_on "zlib"
 
@@ -54,7 +54,7 @@ end
       --enable-threads
       --disable-sctp
       --enable-dynamic-ssl-lib
-      --with-ssl=#{Formula["openssl"].opt_prefix}
+      --with-ssl=#{Formula["openssl3"].opt_prefix}
       --enable-shared-zlib
       --enable-smp-support
     ]
