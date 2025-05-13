@@ -21,9 +21,6 @@ class Ejabberd < Formula
     ENV["TARGET_DIR"] = ENV["DESTDIR"] = "#{lib}/ejabberd/erlang/lib/ejabberd-#{version}"
     ENV["MAN_DIR"] = man
     ENV["SBIN_DIR"] = sbin
-    mkdir_p("deps/p1_pam")
-    resource("p1_pam").verify_download_integrity(resource("p1_pam").fetch)
-    resource("p1_pam").unpack("#{buildpath}/deps/p1_pam")
 
     if build.build_32_bit?
       ENV.append %w[CFLAGS LDFLAGS], "-arch #{Hardware::CPU.arch_32_bit}"
