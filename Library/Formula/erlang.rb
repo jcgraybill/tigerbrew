@@ -36,6 +36,7 @@ class Erlang < Formula
   # Need wxWidgets 2.8.4 or above. Tiger includes 2.5.3, 3.x needs Leopard minimum.
   depends_on "wxmac" => :recommended if MacOS.version > :tiger # for GUI apps like observer
   depends_on "libutil" if MacOS.version < :leopard
+  depends_on "openssl"
   depends_on "zlib"
 
   fails_with :gcc do
@@ -56,6 +57,8 @@ class Erlang < Formula
       --prefix=#{prefix}
       --disable-kernel-poll
       --enable-threads
+      --enable-dynamic-ssl-lib
+      --with-ssl=#{Formula["openssl"].opt_prefix}
       --enable-shared-zlib
       --enable-smp-support
     ]
