@@ -1,27 +1,3 @@
-class Erlang23Requirement < Requirement
-  fatal true
-  env :userpaths
-  default_formula "erlang"
-
-  satisfy do
-    erl = which("erl")
-    next unless erl
-    `#{erl} -noshell -eval 'io:fwrite("~s~n", [erlang:system_info(otp_release)]).' -s erlang halt | grep -q '^2[34567]'`
-    $?.exitstatus == 0
-  end
-
-  def message; <<-EOS.undent
-    Erlang 23+ is required to install.
-
-    You can install this with:
-      brew install erlang
-
-    Or you can use an official installer from:
-      http://www.erlang.org/
-    EOS
-  end
-end
-
 class Elixir < Formula
   desc "Functional metaprogramming aware language built on Erlang VM"
   homepage "http://elixir-lang.org/"
@@ -30,8 +6,7 @@ class Elixir < Formula
 
   head "https://github.com/elixir-lang/elixir.git"
 
-  depends_on Erlang23Requirement
-  # make: *** virtual memory exhausted.  Stop.
+  depends_on 'erlang'
   depends_on "make" => :build
 
   def install
