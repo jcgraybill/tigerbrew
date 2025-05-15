@@ -6,9 +6,10 @@ class Vim < Formula
   sha256 "cdaa9f3561bd36cb37bd3212642efdc0aa0c0a422487026a1043362484dba4e0"
   version "9.1.1076"
   head "https://github.com/vim/vim.git"
+  revision 1
 
   bottle do
-    sha256 "f228e90d45f91d34629c4451803454cd3db7762a9ab04186587165f67041d410" => :tiger_altivec
+    sha256 "c515e77a41984fde7c0ad9ca21a0570b744b87a8004296b1c94239aacc2ceab4" => :tiger_altivec
   end
 
   # We only have special support for finding depends_on :python, but not yet for
