@@ -39,6 +39,8 @@ end
     cause "Bus error when attempting to build HiPE"
   end
 
+  needs :cxx11
+  
   def install
     # Unset these so that building wx, kernel, compiler and
     # other modules doesn't fail with an unintelligable error.
