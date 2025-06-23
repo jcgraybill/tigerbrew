@@ -1,7 +1,7 @@
 class Html2text < Formula
   desc "Advanced HTML-to-text converter"
   homepage "http://www.mbayer.de/html2text/"
-  url "http://www.mbayer.de/html2text/downloads/html2text-1.3.2a.tar.gz"
+  url "https://web.archive.org/web/20160603010554/http://www.mbayer.de/html2text/downloads/html2text-1.3.2a.tar.gz"
   sha256 "000b39d5d910b867ff7e087177b470a1e26e2819920dcffd5991c33f6d480392"
 
   # Patch provided by author. See:

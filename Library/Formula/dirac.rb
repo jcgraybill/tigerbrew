@@ -1,7 +1,7 @@
 class Dirac < Formula
   desc "General-purpose video codec aimed at a range of resolutions"
   homepage "http://diracvideo.org/"
-  url "http://diracvideo.org/download/dirac-research/dirac-1.0.2.tar.gz"
+  url "https://web.archive.org/web/20150802135847/http://diracvideo.org/download/dirac-research/dirac-1.0.2.tar.gz"
   sha256 "816b16f18d235ff8ccd40d95fc5b4fad61ae47583e86607932929d70bf1f00fd"
 
   bottle do
@@ -81,7 +81,8 @@ index 41329b9..8f5ed19 100755
  if test -n "$CONFIG_FILES"; then
 
 
--ac_cr=''
+-ac_cr='
+'
 +ac_cr='
 +'
  ac_cs_awk_cr=`$AWK 'BEGIN { print "a\rb" }' </dev/null 2>/dev/null`
