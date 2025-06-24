@@ -7,7 +7,7 @@ class Html2text < Formula
   # Patch provided by author. See:
   # http://www.mbayer.de/html2text/faq.shtml#sect6
   patch do
-    url "http://www.mbayer.de/html2text/downloads/patch-utf8-html2text-1.3.2a.diff"
+    url "https://web.archive.org/web/20210729215918/http://www.mbayer.de/html2text/downloads/patch-utf8-html2text-1.3.2a.diff"
     sha256 "be4e90094d2854059924cb2c59ca31a5e9e0e22d2245fa5dc0c03f604798c5d1"
   end
 

@@ -7,7 +7,7 @@ class Tig < Formula
   revision 1
 
   stable do
-    url "http://jonas.nitro.dk/tig/releases/tig-2.1.1.tar.gz"
+    url "https://web.archive.org/web/20160506110113/http://jonas.nitro.dk/tig/releases/tig-2.1.1.tar.gz"
     sha256 "50c5179fd564b829b6b2cec087e66f10cf8799601de19350df0772ae77e4852f"
 
     # Merged in HEAD; remove in next stable release

@@ -27,7 +27,7 @@ class Libplist < Formula
   depends_on :python => :optional
 
   resource "cython" do
-    url "http://cython.org/release/Cython-0.21.tar.gz"
+    url "https://web.archive.org/web/20150921100327/http://cython.org/release/Cython-0.21.tar.gz"
     sha256 "0cd5787fb3f1eaf8326b21bdfcb90aabd3eca7c214c5b7b503fbb82da97bbaa0"
   end
 
