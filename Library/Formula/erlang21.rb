@@ -29,6 +29,7 @@ end
 
   depends_on "fop" => :optional
   depends_on "libutil" if MacOS.version < :leopard
+  depends_on "openssl"
   depends_on "wxmac" => :recommended if MacOS.version > :tiger
   depends_on "zlib"
 
