@@ -3,8 +3,10 @@ class Erlang19 < Formula
   homepage "http://www.erlang.org"
 
   keg_only "experimental formula for alternate version"
+  head "https://github.com/erlang/otp.git"
 
   stable do
+    # Download tarball from GitHub; it is served faster than the official tarball.
     url "https://github.com/erlang/otp/archive/OTP-19.3.6.13.tar.gz"
     sha256 "11a914176a33068226644f4e999ecc6e965ab1c60a324d90020f164641631fae"
   end
@@ -29,10 +31,16 @@ end
 #  depends_on "automake" => :build
 #  depends_on "libtool" => :build
 
-  depends_on "fop" => :optional
+  depends_on "autoconf" => :build
+  depends_on "fop" => :optional 
   depends_on "libutil" if MacOS.version < :leopard
   depends_on "wxmac" => :recommended if MacOS.version > :tiger
   depends_on "zlib"
+
+  fails_with :gcc_4_0 do
+    build 5370
+    cause "error: invalid preprocessing directive in HiPE PPC glue"
+  end
 
   fails_with :gcc do
     build 5666
@@ -66,6 +74,11 @@ end
     # In /usr/include/c++/4.0.0/powerpc64-apple-darwin8/bits/stdc++.h.gch/O0g.gch & O2g.gch
     # symbol is found but configure's test for it fails, breaking the build
     args << "ac_cv_type___int128_t=no" if MacOS.version == :tiger && Hardware::CPU.family == :g5
+    # configure irritatingly picks a different compiler than CC in this one place
+    # It's set to prioritize a compiler named "gcc-4.2"
+    # over "gcc" if present, which causes build failures for Tiger users with
+    # apple-gcc42 installed
+    args << "ac_cv_prog_emu_cc=#{ENV.cc}"
 
     if MacOS.version >= :snow_leopard && MacOS::CLT.installed?
       args << "--with-dynamic-trace=dtrace"
@@ -77,6 +90,7 @@ end
       args << "--enable-hipe"
     end
 
+    # Do this if building from a checkout to generate configure
     system "./otp_build", "autoconf"
     system "./configure", *args
     system "make"
