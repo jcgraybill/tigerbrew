@@ -28,8 +28,8 @@ end
   option "without-docs", "Do not install documentation"
 
   # TODO: Breaks Tiger Intel
-#  depends_on "automake" => :build
-#  depends_on "libtool" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
 
   depends_on "autoconf" => :build
   depends_on "fop" => :optional 
