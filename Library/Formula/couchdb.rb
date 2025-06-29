@@ -31,13 +31,6 @@ class Couchdb < Formula
   depends_on "curl" if MacOS.version <= :leopard
 
   def install
-    # CouchDB >=1.3.0 supports vendor names and versioning
-    # in the welcome message
-    inreplace "etc/couchdb/default.ini.tpl.in" do |s|
-      s.gsub! "%package_author_name%", "Tigerbrew"
-      s.gsub! "%version%", pkg_version
-    end
-
     if build.devel? || build.head?
       # workaround for the auto-generation of THANKS file which assumes
       # a developer build environment incl access to git sha
