@@ -18,13 +18,9 @@ class Erlang < Formula
     sha256 "03d86ac3e71bb58e27d01743a9668c7a1265b573541d4111590f0f3ec334383e"
   end
 
-  option "without-hipe", "Disable building HiPE (High-Performance Erlang); fails on various OS X systems"
   option "with-native-libs", "Enable native library compilation"
-  option "with-dirty-schedulers", "Enable experimental dirty schedulers"
+  option "with-dirty-schedulers", "Enable dirty schedulers"
   option "without-docs", "Do not install documentation"
-
-  deprecated_option "disable-hipe" => "without-hipe"
-  deprecated_option "no-docs" => "without-docs"
 
   depends_on "autoconf" => :build
   depends_on "fop" => :optional
@@ -41,11 +37,8 @@ class Erlang < Formula
       --disable-silent-rules
       --prefix=#{prefix}
       --disable-kernel-poll
-      --enable-threads
       --enable-dynamic-ssl-lib
       --with-ssl=#{Formula["openssl"].opt_prefix}
-      --enable-shared-zlib
-      --enable-smp-support
     ]
 
     args << "--enable-native-libs" if build.with? "native-libs"
@@ -54,12 +47,6 @@ class Erlang < Formula
     args << "--without-javac" if MacOS.version < :snow_leopard
     if MacOS.version >= :snow_leopard && MacOS::CLT.installed?
       args << "--with-dynamic-trace=dtrace"
-    end
-
-    if build.without? "hipe"
-      args << "--disable-hipe"
-    else
-      args << "--enable-hipe"
     end
 
     system "./configure", *args
