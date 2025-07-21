@@ -1,7 +1,6 @@
 class Erlang < Formula
   desc "Erlang Programming Language"
   homepage "http://www.erlang.org"
-  head "https://github.com/erlang/otp.git"
 
   stable do
     url "https://github.com/erlang/otp/archive/OTP-23.3.4.20.tar.gz"
