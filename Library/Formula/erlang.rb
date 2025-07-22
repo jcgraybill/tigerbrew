@@ -22,7 +22,7 @@ class Erlang < Formula
   option "without-docs", "Do not install documentation"
 
   depends_on "autoconf" => :build
-  depends_on "fop" => :optional
+  depends_on "fop" => if build.with? "fop"
   depends_on "wxmac" => :recommended if MacOS.version > :tiger
   depends_on "libutil" if MacOS.version < :leopard
   depends_on "openssl"
