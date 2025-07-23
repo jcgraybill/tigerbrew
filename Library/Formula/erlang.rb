@@ -17,7 +17,6 @@ class Erlang < Formula
     sha256 "03d86ac3e71bb58e27d01743a9668c7a1265b573541d4111590f0f3ec334383e"
   end
 
-  option "with-native-libs", "Enable native library compilation"
   option "with-dirty-schedulers", "Enable dirty schedulers"
   option "without-docs", "Do not install documentation"
 
@@ -40,7 +39,6 @@ class Erlang < Formula
       --with-ssl=#{Formula["openssl"].opt_prefix}
     ]
 
-    args << "--enable-native-libs" if build.with? "native-libs"
     args << "--enable-dirty-schedulers" if build.with? "dirty-schedulers"
     args << "--enable-wx" if build.with? "wxmac"
     args << "--without-javac" if MacOS.version < :snow_leopard
