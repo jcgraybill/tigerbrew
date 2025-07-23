@@ -8,5 +8,6 @@ class Rabbitmq < Formula
 
   def install
     prefix.install Dir["*"]
+    prefix.install "etc"
   end
 end
