@@ -10,4 +10,8 @@ class Rabbitmq < Formula
   def install
     prefix.install Dir["*"]
   end
+
+  def test
+    assert_match "#{version}", shell_output("#{sbin}/rabbitmqctl version")
+  end
 end
