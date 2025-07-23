@@ -10,7 +10,7 @@ class Rabbitmq < Formula
   depends_on "erlang"
 
   def install
-    system "PREFIX=#{prefix}", "gmake"
-    system "PREFIX=#{prefix}", "gmake", "install"
+    system "gmake", "PREFIX=#{prefix}"
+    system "gmake", "install", "PREFIX=#{prefix}"
   end
 end
