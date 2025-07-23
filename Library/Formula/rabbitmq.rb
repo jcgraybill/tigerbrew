@@ -5,9 +5,9 @@ class Rabbitmq < Formula
   sha256 "fcb424deb300635086f3bf554063af654bb58f2aa4e84126f514acc00439f5c2"
 
   depends_on "erlang"
+  skip_clean "etc"
 
   def install
     prefix.install Dir["*"]
-    prefix.install "etc"
   end
 end
