@@ -4,6 +4,7 @@ class Ejabberd < Formula
   url "https://github.com/processone/ejabberd/archive/refs/tags/25.04.tar.gz"
   sha256 "54beae3e7729fdaab1d578a9d59046f31d8ce31c851ae5aca9532821ff22cb45"
 
+  depends_on "autoconf" => :build
   depends_on "rebar3" => :build
   depends_on "erlang"
   depends_on "openssl3"
