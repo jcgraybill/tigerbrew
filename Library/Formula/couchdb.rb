@@ -6,12 +6,12 @@ class Couchdb < Formula
 
   fails_with :gcc_4_0 do
     build 5493
-    cause "TODO: why"
+    cause "Does not support thread_local on Mac OS"
   end
 
   fails_with :gcc do
     build 5577
-    cause "TODO: why"
+    cause "Does not support thread_local on Mac OS"
   end
 
   depends_on :macos => :leopard # due to spidermonkey dependency

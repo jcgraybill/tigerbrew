@@ -19,12 +19,12 @@ class Erlang < Formula
 
   fails_with :gcc_4_0 do
     build 5493
-    cause "TODO: why"
+    cause "beam/erl_process.c fails to compile with gcc < 4.4"
   end
 
   fails_with :gcc do
     build 5577
-    cause "TODO: why"
+    cause "beam/erl_process.c fails to compile with gcc < 4.4"
   end
 
   option "with-dirty-schedulers", "Enable dirty schedulers"
