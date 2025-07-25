@@ -17,6 +17,16 @@ class Erlang < Formula
     sha256 "03d86ac3e71bb58e27d01743a9668c7a1265b573541d4111590f0f3ec334383e"
   end
 
+  fails_with :gcc_4_0 do
+    build 5493
+    cause "TODO: why"
+  end
+
+  fails_with :gcc do
+    build 5577
+    cause "TODO: why"
+  end
+
   option "with-dirty-schedulers", "Enable dirty schedulers"
   option "without-docs", "Do not install documentation"
 
