@@ -4,6 +4,7 @@ class TclTk < Formula
   url "http://prdownloads.sourceforge.net/tcl/tcl8.6.16-src.tar.gz"
   version "8.6.16"
   sha256 "91cb8fa61771c63c262efb553059b7c7ad6757afa5857af6265e4b0bdc2a14a5"
+  revision 1
 
   bottle do
     sha256 "19009ca7d37ad310840cba54d856759657ac9fedb06bdd962eb9614a7bef13db" => :tiger_altivec
@@ -63,6 +64,12 @@ class TclTk < Formula
         else
           args << "--enable-aqua=yes"
           args << "--without-x"
+          if ENV.compiler == :gcc
+            inreplace "macosx/tkMacOSXWindowEvent.c" do |s|
+              s.sub! "self.layer.contentsGravity = self.layer.contentsAreFlipped ?", ""
+              s.sub! "kCAGravityTopLeft : kCAGravityBottomLeft;", "if (self.layer.contentsAreFlipped) { self.layer.contentsGravity = kCAGravityTopLeft; } else { self.layer.contentsGravity = kCAGravityBottomLeft;}"
+            end
+          end
         end
 
         cd "unix" do
